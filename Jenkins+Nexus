@@ -17,3 +17,40 @@ update-alternatives --config java
 #STEP-4: RESTARTING JENKINS (when we download service it will on stopped state)
 systemctl start jenkins.service
 systemctl status jenkins.service
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Nexus installation:
+----------put it in server ----------------
+wget https://download.sonatype.com/nexus/3/nexus-3.81.0-08-linux-x86_64.tar.gz
+ls
+ tar -xvf nexus-3.81.0-08-linux-x86_64.tar.gz----- untar by this query
+[root@nexus ~]# cd nexus-3.81.0-08/
+ls
+bin  deploy  etc  jdk  NOTICE.txt  OSS-LICENSE.txt
+[root@nexus nexus-3.81.0-08]# cd
+
+ yum install java-17-amazon-corretto -y----- root
+----- check Java version ----
+java --version
+sudo useradd nexus
+cat /etc/passwd
+ chown -R  nexus:nexus  nexus-3.81.0-08-----------------------[root@nexus ~]# chown -R  nexus:nexus  nexus-3.81.0-08
+ll
+ sudo sh nexus-3.81.0-08/bin/nexus start
+ cat /root/sonatype-work/nexus3/admin.password
