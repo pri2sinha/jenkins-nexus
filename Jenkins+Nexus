@@ -135,7 +135,7 @@ pipeline {
 
 Trouble shooting :
 
-Step 1: Check your Jenkins Maven version
+Step 1: Check your Jenkins Maven version----------step 2
 Go to Jenkins Dashboard → Manage Jenkins → Global Tool Configuration
 Under Maven, check the configured version.
 If not present, click Add Maven, give it a name (e.g., maven-3.8.8)
@@ -162,13 +162,13 @@ Steps to Create a New User in Nexus Repository Manager
 Login to Nexus as admin
 URL: http://43.204.217.236:8081
 
-Go to Settings (gear icon) → Security → Users    Click the + Create local user button
+Go to Settings (gear icon) → Security → Users    Click the + Create local user button-------1st step
 Fill the form:
 User ID: jenkins
 First name: Jenkins
 Last name: User
-Email: your-email@example.com
-Password: (Set a strong password, note this down for Jenkins)
+Email: your-email@example.com(anything)
+Password: (Set a strong password, note this down for Jenkins)--------priyanka
 Status: Active
 
 Next Step in Jenkins
@@ -179,3 +179,6 @@ ID: nexus-creds
 Update your pipeline:
 
 "credentialsId: 'nexus-creds'"
+
+
+https://github.com/Venkatareddy1714/NEXUS-ARTIFACT/blob/main/Troubleshooting%20Steps
