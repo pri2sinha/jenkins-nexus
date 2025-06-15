@@ -82,14 +82,16 @@ ls
 [root@nexus ~]# cd nexus-3.81.0-08/
 ls
 bin  deploy  etc  jdk  NOTICE.txt  OSS-LICENSE.txt
-[root@nexus nexus-3.81.0-08]# cd
+[root@nexus nexus-3.81.0-08]# cd---- to go back to root
+
+Now install Java
 
  yum install java-17-amazon-corretto -y----- root
 ----- check Java version ----
 java --version
-sudo useradd nexus
+sudo useradd nexus----- for nexus repository should run under a dedicated user account , not as root
 cat /etc/passwd
- chown -R  nexus:nexus  nexus-3.81.0-08-----------------------[root@nexus ~]# chown -R  nexus:nexus  nexus-3.81.0-08
+ chown -R  nexus:nexus  nexus-3.81.0-08----to give read /write and execute access-------------------[root@nexus ~]# chown -R  nexus:nexus  nexus-3.81.0-08
 ll
  sudo sh nexus-3.81.0-08/bin/nexus start
  cat /root/sonatype-work/nexus3/admin.password
