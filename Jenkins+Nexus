@@ -137,20 +137,20 @@ pipeline {
 
 Trouble shooting :
 
-Step 1: Check your Jenkins Maven version----------step 2
+Step 1: Check your Jenkins Maven version----------step 2----done
 Go to Jenkins Dashboard → Manage Jenkins → Global Tool Configuration
 Under Maven, check the configured version.
 If not present, click Add Maven, give it a name (e.g., maven-3.8.8)
 Check Install automatically and choose a higher version like 3.8.8 or 3.9.6
 
 
- Step 2: Verify Nexus Credentials
+ Step 2: Verify Nexus Credentials--- done
 Log in to Nexus: http://43.204.217.236:8081
 Go to Security → Users
 Check that: The username you're using exists
 It has deployment rights to the maven repository (i.e., role like nx-deployment)
 
-Step 3: Fix Jenkins Credentials
+Step 3: Fix Jenkins Credentials--- done
 Go to Jenkins → Manage Jenkins → Credentials(Usually under (global) → Global credentials)
 Ensure a Username with Password credential exists with
 Username = Nexus username
@@ -160,20 +160,20 @@ If not sure, create a new one: Kind: Username with password
 ID: nexus-creds Use this updated ID in your pipeline
 
 
-Steps to Create a New User in Nexus Repository Manager
+Steps to Create a New User in Nexus Repository Manager---- done
 Login to Nexus as admin
 URL: http://43.204.217.236:8081
 
-Go to Settings (gear icon) → Security → Users    Click the + Create local user button-------1st step
+Go to Settings (gear icon) → Security → Users    Click the + Create local user button-------1st step--- done
 Fill the form:
 User ID: jenkins
 First name: Jenkins
 Last name: User
 Email: your-email@example.com(anything)
-Password: (Set a strong password, note this down for Jenkins)--------priyanka
+Password: (Set a strong password, note this down for Jenkins)--------priyanka1
 Status: Active
 
-Next Step in Jenkins
+Next Step in Jenkins--- done
 Now update Jenkins with this user:
 Go to Jenkins > Manage Jenkins > Credentials > Global
 Add new "Username with password":  Username: jenkins    Password: the one you just set
