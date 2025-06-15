@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven-3.9.6'
+    }
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/pri2sinha/Gitfile.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('artifact') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('Artifact upload') {
+            steps {
+                nexusArtifactUploader artifacts: [[artifactId: 'NETFLIX', classifier: '', file: 'target/NETFLIX-1.2.2.war', type: '.war']], credentialsId: 'nexus-creds', groupId: 'in.PRIYANKA', nexusUrl: '13.233.37.58:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven', version: '1.2.2'
+            }
+        }
+    }
+}
