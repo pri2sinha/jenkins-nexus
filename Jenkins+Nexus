@@ -18,6 +18,45 @@ update-alternatives --config java
 systemctl start jenkins.service
 systemctl status jenkins.service
 
+Set up of jenkins :
+
+pipeline:
+Creation of pipeline in Jenkins:
+
+pipeline {
+    agent any
+    tools {
+        maven 'maven-3.8.8'  // Replace with the name you configured in Jenkins
+    }
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/Venkatareddy1714/jenkins-java-project123.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('artifact') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('Artifact upload') {
+            steps {
+                nexusArtifactUploader artifacts: [[artifactId: 'NETFLIX', classifier: '', file: 'target/NETFLIX-1.2.2.war', type: '.war']], credentialsId: 'nexus-creds', groupId: 'in.VENKAT', nexusUrl: '43.204.217.236:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven', version: '1.2.2'
+            }
+        }
+    }
+}
+
 
 
 
@@ -54,3 +93,89 @@ cat /etc/passwd
 ll
  sudo sh nexus-3.81.0-08/bin/nexus start
  cat /root/sonatype-work/nexus3/admin.password
+
+
+
+Creation of pipeline in Jenkins:
+
+pipeline {
+    agent any
+    tools {
+        maven 'maven-3.8.8'  // Replace with the name you configured in Jenkins
+    }
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/Venkatareddy1714/jenkins-java-project123.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('artifact') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('Artifact upload') {
+            steps {
+                nexusArtifactUploader artifacts: [[artifactId: 'NETFLIX', classifier: '', file: 'target/NETFLIX-1.2.2.war', type: '.war']], credentialsId: 'nexus-creds', groupId: 'in.VENKAT', nexusUrl: '43.204.217.236:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven', version: '1.2.2'
+            }
+        }
+    }
+}
+
+
+Trouble shooting :
+
+Step 1: Check your Jenkins Maven version
+Go to Jenkins Dashboard → Manage Jenkins → Global Tool Configuration
+Under Maven, check the configured version.
+If not present, click Add Maven, give it a name (e.g., maven-3.8.8)
+Check Install automatically and choose a higher version like 3.8.8 or 3.9.6
+
+
+ Step 2: Verify Nexus Credentials
+Log in to Nexus: http://43.204.217.236:8081
+Go to Security → Users
+Check that: The username you're using exists
+It has deployment rights to the maven repository (i.e., role like nx-deployment)
+
+Step 3: Fix Jenkins Credentials
+Go to Jenkins → Manage Jenkins → Credentials(Usually under (global) → Global credentials)
+Ensure a Username with Password credential exists with
+Username = Nexus username
+Password = Nexus password or token
+ID = 2d5d3c2a-15c8-437b-af1b-7940b100bd76 ← This must match what’s used in your pipeline
+If not sure, create a new one: Kind: Username with password
+ID: nexus-creds Use this updated ID in your pipeline
+
+
+Steps to Create a New User in Nexus Repository Manager
+Login to Nexus as admin
+URL: http://43.204.217.236:8081
+
+Go to Settings (gear icon) → Security → Users    Click the + Create local user button
+Fill the form:
+User ID: jenkins
+First name: Jenkins
+Last name: User
+Email: your-email@example.com
+Password: (Set a strong password, note this down for Jenkins)
+Status: Active
+
+Next Step in Jenkins
+Now update Jenkins with this user:
+Go to Jenkins > Manage Jenkins > Credentials > Global
+Add new "Username with password":  Username: jenkins    Password: the one you just set
+ID: nexus-creds
+Update your pipeline:
+
+"credentialsId: 'nexus-creds'"
