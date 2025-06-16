@@ -182,7 +182,7 @@ Update your pipeline:
 
 "credentialsId: 'nexus-creds'"
 
-******** important think is to create repository in Nexus************ 
+******** important thing is to create repository in Nexus************ 
 Setting>click repository>click repositories>create repository>select maven2-hosted>
 A unique identifier for this repository----- provide>>>create repository
 
